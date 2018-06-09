@@ -17,6 +17,9 @@ module.exports = function(grunt) {
     var options = this.data;
     var jarConfig = {
         command: 'jar',
+        execOptions: {
+          maxBuffer: Infinity
+        },
         jarName: options.manifest && options.manifest.name ? options.manifest.name : 'MANIFEST',
         jarOptions : 'cvfm',
         manifestName: options.destDir + '/' + options.jarName,
