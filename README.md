@@ -65,8 +65,8 @@ grunt.initConfig({
         manifest: {
           name: 'MANIFEST',
           entries: {
-            Label: process.env.UISNIP_GIT_TAG,
-            Commit: process.env.gitlabBranch + '-' + process.env.GIT_COMMIT
+            Label: 'My Jar',
+            Version: '1.0.1'
           }
       }
     }
