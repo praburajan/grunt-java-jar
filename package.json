@@ -1,7 +1,7 @@
 {
   "name": "grunt-java-jar",
   "description": "generate a jar with provided manifest entries and list of files",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/praburajan/grunt-java-jar",
   "author": {
     "name": "Prabu Rajan",
