@@ -73,7 +73,7 @@ grunt.initConfig({
 ```
 
 #### Create a Jar without Manifest Entries
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, we dont provide any manifestEntries option and still the jar command completes by generating an empty MANIFEST file
 
 ```js
 grunt.initConfig({
