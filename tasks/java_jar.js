@@ -17,13 +17,13 @@ module.exports = function(grunt) {
     var options = this.data;
     var jarConfig = {
         command: 'jar',
-        jarName: 'MANIFEST',
+        jarName: options.manifest && options.manifest.name ? options.manifest.name : 'MANIFEST',
         jarOptions : 'cvfm',
         manifestName: options.destDir + '/' + options.jarName,
         dir: options.dir,
         files: options.files
     };
-    if(!options.manifestEntries || Object.keys(options.manifestEntries).length === 0) {
+    if(!options.manifest || (options.manifest && options.manifest.entries && Object.keys(options.manifest.entries).length === 0)) {
       delete jarConfig.jarName;
       jarConfig.jarOptions = 'cvf';
     }
@@ -36,12 +36,14 @@ module.exports = function(grunt) {
         last: 'rajan',
         age: 40
       }
-      //grunt.log.writeflags(options.manifestEntries, 'Manifest entries ==== ');
-      if(options.manifestEntries && Object.keys(options.manifestEntries).length > 0) {
-        Object.keys(options.manifestEntries).forEach(function(prop) {
-          manifest = manifest + prop + ':' + ' ' + options.manifestEntries[prop] + '\n';
+      
+      if(options.manifest && options.manifest.entries && Object.keys(options.manifest.entries).length > 0) {
+        grunt.log.writeflags(options.manifest.entries, 'Manifest entries ==== ');
+        var mfileName = options.manifest.name || 'MANIFEST';
+        Object.keys(options.manifest.entries).forEach(function(prop) {
+          manifest = manifest + prop + ':' + ' ' + options.manifest.entries[prop] + '\n';
         });
-        grunt.file.write('MANIFEST', manifest);
+        grunt.file.write(mfileName, manifest);
       }
 
       grunt.config.merge({
@@ -54,7 +56,7 @@ module.exports = function(grunt) {
     }
     catch(error) {
       grunt.log.error(error);
-      grunt.fail.warn("Error writing manifest file", 3);
+      grunt.fail.warn("Error creating jar file", 3);
     }
   });
 };

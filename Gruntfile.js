@@ -35,9 +35,12 @@ module.exports = function(grunt) {
         jarName: 'myjar.jar',
         dir: 'test/fixtures',
         files: '.',
-        manifestEntries: {
-          Label: process.env.UISNIP_GIT_TAG,
-          Commit: process.env.gitlabBranch + '-' + process.env.GIT_COMMIT
+        manifest: {
+          name: 'MANIFEST',
+          entries: {
+            Label: process.env.UISNIP_GIT_TAG,
+            Commit: process.env.gitlabBranch + '-' + process.env.GIT_COMMIT
+          }
         }
       }
     },
@@ -59,7 +62,7 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'java_jar', 'nodeunit', 'clean']);
+  grunt.registerTask('test', ['clean', 'java_jar', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', 'java_jar');

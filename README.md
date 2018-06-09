@@ -52,23 +52,25 @@ A string value that is used to do something else with whatever else.
 ### Usage Examples
 
 #### Create a Jar with Manifest Entries
-We will provide manifest entries of the jar as a javascript object. The plugin will create a MANIFEST.MF file and call jar command to include this file as its MANIFEST
+We will provide manifest entries of the jar as a javascript object. The plugin will create a MANIFEST.MF file and call jar command to include this file as its MANIFEST. You can override the MANIFEST file name and the separator between each key-value pair
 
 ```js
 grunt.initConfig({
   java_jar: {
       myjar: {
-        destDir: 'dist/jar', //where the jar file is written
-        jarName: 'myjar.jar', //name of the jar file
-        dir: 'test/fixtures', //working directory where the jar command will run
-        files: '.', //All files specified in the blob pattern using files option will be packed into the jar
-        //provide the manifest entries as a javascript object with key value pairs. The MANIFEST file will contain
-        manifestEntries: {
-          Label: 'Myjar',
-          Version: '1.0.1'
-        }
+        destDir: 'dist/jar',
+        jarName: 'myjar.jar',
+        dir: 'test/fixtures',
+        files: '.',
+        manifest: {
+          name: 'MANIFEST',
+          entries: {
+            Label: process.env.UISNIP_GIT_TAG,
+            Commit: process.env.gitlabBranch + '-' + process.env.GIT_COMMIT
+          }
       }
-    },
+    }
+  }
 });
 ```
 
