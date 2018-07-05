@@ -38,8 +38,8 @@ module.exports = function(grunt) {
         manifest: {
           name: 'MANIFEST',
           entries: {
-            Label: process.env.UISNIP_GIT_TAG,
-            Commit: process.env.gitlabBranch + '-' + process.env.GIT_COMMIT
+            Label: 'UISNIP_GENERIC_180606.1100.0001',
+            Commit: 'develop-abcdefgh'
           }
         }
       }
