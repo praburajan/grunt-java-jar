@@ -65,6 +65,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['clean', 'java_jar', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['java_jar','clean']);
+  grunt.registerTask('default', 'java_jar');
 
 };

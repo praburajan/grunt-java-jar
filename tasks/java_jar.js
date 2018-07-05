@@ -40,9 +40,9 @@ module.exports = function(grunt) {
         age: 40
       }
       
+      var mfileName = options.manifest.name || 'MANIFEST';
       if(options.manifest && options.manifest.entries && Object.keys(options.manifest.entries).length > 0) {
         grunt.log.writeflags(options.manifest.entries, 'Manifest entries ==== ');
-        var mfileName = options.manifest.name || 'MANIFEST';
         Object.keys(options.manifest.entries).forEach(function(prop) {
           manifest = manifest + prop + ':' + ' ' + options.manifest.entries[prop] + '\n';
         });
@@ -52,10 +52,15 @@ module.exports = function(grunt) {
       grunt.config.merge({
         run_java: {
           generate_jar: jarConfig
-        }
+        },
+	clean: {
+	  manifest: {
+	    src: [mfileName]
+	  }
+	}
       });
 
-      grunt.task.run('run_java:generate_jar');
+      grunt.task.run(['run_java:generate_jar','clean:manifest']);
     }
     catch(error) {
       grunt.log.error(error);
